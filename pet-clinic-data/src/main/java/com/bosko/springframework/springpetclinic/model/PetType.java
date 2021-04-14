@@ -1,6 +1,6 @@
 package com.bosko.springframework.springpetclinic.model;
 
-public class PetType {
+public class PetType extends BaseEntity{
 
     private String name;
 
