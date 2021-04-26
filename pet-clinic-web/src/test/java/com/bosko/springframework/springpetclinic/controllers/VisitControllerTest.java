@@ -94,8 +94,8 @@ class VisitControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("date","2018-11-11")
                 .param("description", VISIT_DESCRIPTION))
-                .andExpect(status().isOk())
-                .andExpect(view().name(PETS_CREATE_OR_UPDATE_VISIT_FORM))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/{ownerId}"))
                 .andExpect(model().attributeExists("visit"))
         ;
     }
