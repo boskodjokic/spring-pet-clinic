@@ -80,15 +80,36 @@ public class PetController {
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
     }
 
+//    @PostMapping("/pets/{petId}/edit")
+//    public String processUpdateForm(@Validated Pet pet, BindingResult result, Owner owner, Model model) {
+//        if (result.hasErrors()) {
+//            pet.setOwner(owner);
+//            model.addAttribute("pet", pet);
+//            return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
+//        } else {
+//
+//            petService.save(pet);
+//            pet.setOwner(owner);
+//            owner.getPets().add(pet);
+//
+//
+//            return "redirect:/owners/" + owner.getId();
+//        }
+//    }
+
     @PostMapping("/pets/{petId}/edit")
     public String processUpdateForm(@Validated Pet pet, BindingResult result, Owner owner, Model model) {
+        pet.setOwner(owner);
+
         if (result.hasErrors()) {
             pet.setOwner(owner);
+            System.out.println(pet.toString());
             model.addAttribute("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         } else {
-            owner.getPets().add(pet);
+
             petService.save(pet);
+
             return "redirect:/owners/" + owner.getId();
         }
     }
