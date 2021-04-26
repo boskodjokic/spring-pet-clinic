@@ -107,18 +107,26 @@ class PetControllerTest {
         verify(petService).save(any());
     }
 
-//    @Test
-//    void populatePetTypes() {
-//        //todo impl
-//    }
-//
-//    @Test
-//    void findOwner() {
-//        //todo impl
-//    }
-//
-//    @Test
-//    void initOwnerBinder() {
-//        //todo impl
-//    }
+    @Test
+    void populatePetTypes() throws Exception {
+
+        when(ownerService.findById(anyLong())).thenReturn(owner);
+        when(petTypeService.findAll()).thenReturn(petTypes);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/owners/1/pets/new"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("types"))
+                .andExpect(view().name("pets/createOrUpdatePetForm"));
+    }
+
+    @Test
+    void findOwner() throws Exception {
+
+        when((ownerService.findById(anyLong()))).thenReturn(owner);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/owners/1/pets/new"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("owner"));
+    }
+
 }
