@@ -92,7 +92,7 @@ class VisitControllerTest {
     void processNewVisitForm() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(visitsUri)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("date","2018-11-11")
+                .param("date","11-11-2018")
                 .param("description", VISIT_DESCRIPTION))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/owners/{ownerId}"))
